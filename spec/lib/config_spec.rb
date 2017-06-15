@@ -84,6 +84,13 @@ module ZipkinTracer
           config = Config.new(nil, zookeeper: 'http://server.yes.net')
           expect(config.adapter).to eq(:kafka)
         end
+
+        it 'returns :kafka if producer is set' do
+          producer = Object.new
+          allow(producer).to receive(:respond_to?).with(:push).and_return(true)
+          config = Config.new(nil, producer: producer)
+          expect(config.adapter).to eq(:kafka_producer)
+        end
       end
     end
   end
