@@ -49,7 +49,7 @@ module Trace
     private
     def initialize_hermann_producer(zookeepers)
       broker_ids = Hermann::Discovery::Zookeeper.new(zookeepers).get_brokers
-      @producer  = Hermann::Producer.new(nil, broker_ids)
+      @producer  = Hermann::Producer.new(@topic, broker_ids)
     end
   end
 end
